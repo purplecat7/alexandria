@@ -84,7 +84,7 @@ class ItemList:
         :return:
         """
         self._list.remove(item)
-        item.reset_checkout()
+        item.reset_checkoutdate()
 
 if __name__ == '__main__':
     pass

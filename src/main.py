@@ -25,14 +25,16 @@ def scenario_judy_hacker(library):
     library.return_item(2, "New Moon")
     library.checkout_item(2, "Twilight")
     library.checkout_item(2, "Debugging to music")
-    library.return_item(2, "Pirates of the Caribbean: The Journal")
+    #### Adam: How does the library know she has this journal if it hasn't been previously checked out?? ####
+    #### She must have stolen it. Should we have a library.call_police() method? ####
+    # library.return_item(2, "Pirates of the Caribbean: The Journal")
 
 
 def scenario_miss_marple(library):
     # 2 = Miss
     library.checkout_item(1, "Sleuthing in C#", date=datetime.now() - timedelta(days=8271))  # C# first appeared in 2000
     # Miss marple tries to check out journal 'Sleuthing in C#'
-    if library.check_user_can_checkout(2):
+    if library.can_checkout(2):
         library.checkout_item(3, "Sleuthing in C#")
     else:
         print("Unable to check out item... :(")
@@ -49,6 +51,7 @@ def scenario_eric_halfbee(library):
     library.checkout_item(4, "The Tales of Beedle the Bard", date=datetime.now() - timedelta(days=40))
     library.return_item(4, "Life of Pi")
     library.return_item(4, "Labyrinth")
+    #### Adam: Fixed extra whitespace on this title in the txt file ####
     library.return_item(4, "The Tales of Beedle the Bard")
     fine = library.get_total_fine(4)
     print(f"Outstanding fine: £{fine:.2f}")
@@ -61,7 +64,11 @@ def build_library(library):
 
     item_builder.set_library(library)
 
-    item_builder.load_books_in_file("top100t.txt")
+    ##### Adam: Needed to change the path to this slightly on my machine ####
+    # item_builder.load_books_in_file("top100t.txt")
+    item_builder.load_books_in_file("src/top100t.txt")
+    #### Adam: Added debugging to music to the library ####
+    item_builder.create_dvd("Debugging to music")
     item_builder.create_dvd("Pirates of the Caribbean")
     item_builder.create_journal("Pirates of the Caribbean: The Journal")
     item_builder.create_journal("Sleuthing in C#")
